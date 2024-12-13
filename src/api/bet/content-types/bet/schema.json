@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bets",
+  "info": {
+    "singularName": "bet",
+    "pluralName": "bets",
+    "displayName": "Bet",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "licenseKey": "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NjU1ODM5OTksImp0aSI6Ijk5ZjM0YzAyLTYyOWEtNDQ1MC1iNGEyLWIxOGI3MTczNDE5MSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwiZmVhdHVyZXMiOlsiRFJVUCIsIkJPWCJdLCJ2YyI6ImM4MDEyODdkIn0.YDQ9hOUndwOxa0atOKe7hkwJW0QcTP-6ZwZfu4z3wBuG_YCdO_zRYpkkFlFZj-2xGVWWJAx9p2ZYHNOG7eC3vg",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "betStatus": {
+      "type": "enumeration",
+      "enum": [
+        "In progress",
+        "Win",
+        "Lose",
+        "Void"
+      ]
+    },
+    "tips": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tip.tip"
+    },
+    "stake": {
+      "type": "decimal"
+    }
+  }
+}

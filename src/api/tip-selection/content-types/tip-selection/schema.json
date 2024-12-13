@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tip_selections",
+  "info": {
+    "singularName": "tip-selection",
+    "pluralName": "tip-selections",
+    "displayName": "TipSelection"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}
