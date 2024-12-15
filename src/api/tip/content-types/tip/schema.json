@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "description": {
-      "type": "string"
-    },
     "starts": {
       "type": "datetime"
     },
@@ -40,6 +37,13 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::league.league"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
     }
   }
 }

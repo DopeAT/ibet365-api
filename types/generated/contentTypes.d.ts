@@ -390,11 +390,9 @@ export interface ApiBetCategoryBetCategory extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          licenseKey: 'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NjU1ODM5OTksImp0aSI6Ijk5ZjM0YzAyLTYyOWEtNDQ1MC1iNGEyLWIxOGI3MTczNDE5MSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwiZmVhdHVyZXMiOlsiRFJVUCIsIkJPWCJdLCJ2YyI6ImM4MDEyODdkIn0.YDQ9hOUndwOxa0atOKe7hkwJW0QcTP-6ZwZfu4z3wBuG_YCdO_zRYpkkFlFZj-2xGVWWJAx9p2ZYHNOG7eC3vg';
-          output: 'HTML';
-          preset: 'rich';
+          preset: 'defaultHtml';
         }
       >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -433,11 +431,9 @@ export interface ApiBetBet extends Struct.CollectionTypeSchema {
     date: Schema.Attribute.DateTime;
     description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          licenseKey: 'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NjU1ODM5OTksImp0aSI6Ijk5ZjM0YzAyLTYyOWEtNDQ1MC1iNGEyLWIxOGI3MTczNDE5MSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwiZmVhdHVyZXMiOlsiRFJVUCIsIkJPWCJdLCJ2YyI6ImM4MDEyODdkIn0.YDQ9hOUndwOxa0atOKe7hkwJW0QcTP-6ZwZfu4z3wBuG_YCdO_zRYpkkFlFZj-2xGVWWJAx9p2ZYHNOG7eC3vg';
-          output: 'HTML';
-          preset: 'rich';
+          preset: 'defaultHtml';
         }
       >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -476,11 +472,9 @@ export interface ApiChallengeChallenge extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::ckeditor5.CKEditor',
         {
-          licenseKey: 'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NjU1ODM5OTksImp0aSI6Ijk5ZjM0YzAyLTYyOWEtNDQ1MC1iNGEyLWIxOGI3MTczNDE5MSIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiXSwiZmVhdHVyZXMiOlsiRFJVUCIsIkJPWCJdLCJ2YyI6ImM4MDEyODdkIn0.YDQ9hOUndwOxa0atOKe7hkwJW0QcTP-6ZwZfu4z3wBuG_YCdO_zRYpkkFlFZj-2xGVWWJAx9p2ZYHNOG7eC3vg';
-          output: 'HTML';
-          preset: 'rich';
+          preset: 'defaultHtml';
         }
       >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -636,7 +630,13 @@ export interface ApiTipTip extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.String;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     homeTeam: Schema.Attribute.Relation<'oneToOne', 'api::team.team'>;
     league: Schema.Attribute.Relation<'oneToOne', 'api::league.league'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
