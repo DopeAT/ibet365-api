@@ -16,9 +16,20 @@ export default factories.createCoreController('api::challenge.challenge', ({stra
                 'totalBets',
                 'bank'
             ],
+            where: {
+              published_at: {
+                  $not: null
+              },
+              ... await this.sanitizeQuery(ctx)
+            },
             populate: {
                 bets: {
-                    select: ['title']
+                    select: ['title'],
+                    where: {
+                        published_at: {
+                            $not: null
+                        },
+                    }
                 },
             }
         })
@@ -40,15 +51,37 @@ export default factories.createCoreController('api::challenge.challenge', ({stra
                 'totalBets',
                 'bank'
             ],
+            where: {
+                slug,
+                published_at: {
+                    $not: null
+                },
+                ... await this.sanitizeQuery(ctx)
+            },
             populate: {
                 bets: {
                     select: ['title', 'description', 'date', 'betStatus', 'stake'],
+                    where: {
+                        published_at: {
+                            $not: null
+                        },
+                    },
                     populate: {
                         tips: {
                             select: ['description', 'starts', 'odds'],
+                            where: {
+                                published_at: {
+                                    $not: null
+                                },
+                            },
                             populate: {
                                 homeTeam: {
                                     select: ['name'],
+                                    where: {
+                                        published_at: {
+                                            $not: null
+                                        },
+                                    },
                                     populate: {
                                         logo: {
                                             select: ['url']
@@ -57,6 +90,11 @@ export default factories.createCoreController('api::challenge.challenge', ({stra
                                 },
                                 awayTeam: {
                                     select: ['name'],
+                                    where: {
+                                        published_at: {
+                                            $not: null
+                                        },
+                                    },
                                     populate: {
                                         logo: {
                                             select: ['url']
@@ -64,16 +102,31 @@ export default factories.createCoreController('api::challenge.challenge', ({stra
                                     }
                                 },
                                 tipsSelections: {
-                                    select: ['title']
+                                    select: ['title'],
+                                    where: {
+                                        published_at: {
+                                            $not: null
+                                        },
+                                    },
                                 },
                                 league: {
                                     select: ['title'],
+                                    where: {
+                                        published_at: {
+                                            $not: null
+                                        },
+                                    },
                                     populate: {
                                         logo: {
                                             select: ['url']
                                         },
                                         country: {
                                             select: ['name'],
+                                            where: {
+                                                published_at: {
+                                                    $not: null
+                                                },
+                                            },
                                             populate: {
                                                 flag: {
                                                     select: ['url']
@@ -83,7 +136,7 @@ export default factories.createCoreController('api::challenge.challenge', ({stra
                                     }
                                 }
                             }
-                        }
+                        },
                     }
                 },
             }

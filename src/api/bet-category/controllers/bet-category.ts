@@ -13,12 +13,28 @@ export default factories.createCoreController('api::bet-category.bet-category', 
                 'description',
                 'betStatus',
             ],
+            where: {
+                published_at: {
+                    $not: null
+                },
+                ... await this.sanitizeQuery(ctx)
+            },
             populate: {
                 bets: {
                     select: ['title'],
+                    where: {
+                        published_at: {
+                            $not: null
+                        },
+                    },
                     populate: {
                         tips: {
                             select: ['description', 'starts', 'odds'],
+                            where: {
+                                published_at: {
+                                    $not: null
+                                },
+                            },
                         }
                     }
                 },
@@ -39,38 +55,78 @@ export default factories.createCoreController('api::bet-category.bet-category', 
                 'description',
                 'betStatus',
             ],
+            where: {
+                slug,
+                published_at: {
+                    $not: null
+                },
+                ... await this.sanitizeQuery(ctx)
+            },
             populate: {
                 bets: {
                     select: ['title', 'description', 'date', 'betStatus'],
+                    where: {
+                        published_at: {
+                            $not: null
+                        },
+                    },
                     populate: {
                         tips: {
                             select: ['description', 'starts', 'odds'],
+                            where: {
+                                published_at: {
+                                    $not: null
+                                },
+                            },
                             populate: {
                                 homeTeam: {
                                     select: ['name'],
+                                    where: {
+                                        published_at: {
+                                            $not: null
+                                        },
+                                    },
                                     logo: {
                                         select: ['url']
                                     },
                                 },
                                 awayTeam: {
-                                    homeTeam: {
-                                        select: ['name']
+                                    select: ['name'],
+                                    where: {
+                                        published_at: {
+                                            $not: null
+                                        },
                                     },
                                     logo: {
                                         select: ['url']
                                     },
                                 },
                                 tipsSelections: {
-                                    select: ['title']
+                                    select: ['title'],
+                                    where: {
+                                        published_at: {
+                                            $not: null
+                                        },
+                                    },
                                 },
                                 league: {
                                     select: ['title'],
+                                    where: {
+                                        published_at: {
+                                            $not: null
+                                        },
+                                    },
                                     populate: {
                                         logo: {
                                             select: ['url']
                                         },
                                         country: {
                                             select: ['name'],
+                                            where: {
+                                                published_at: {
+                                                    $not: null
+                                                },
+                                            },
                                             populate: {
                                                 flag: {
                                                     select: ['url']
