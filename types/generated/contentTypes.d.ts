@@ -385,6 +385,7 @@ export interface ApiBetCategoryBetCategory extends Struct.CollectionTypeSchema {
     betStatus: Schema.Attribute.Enumeration<
       ['In progress', 'Win', 'Lose', 'Void']
     >;
+    bookieSlug: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -403,6 +404,7 @@ export interface ApiBetCategoryBetCategory extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.String;
+    stake: Schema.Attribute.Decimal;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -425,6 +427,7 @@ export interface ApiBetBet extends Struct.CollectionTypeSchema {
     betStatus: Schema.Attribute.Enumeration<
       ['In progress', 'Win', 'Lose', 'Void']
     >;
+    bookieSlug: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -442,7 +445,7 @@ export interface ApiBetBet extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.String;
     stake: Schema.Attribute.Decimal;
-    tips: Schema.Attribute.Relation<'oneToMany', 'api::tip.tip'>;
+    tip: Schema.Attribute.Relation<'oneToOne', 'api::tip.tip'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -464,6 +467,7 @@ export interface ApiChallengeChallenge extends Struct.CollectionTypeSchema {
   attributes: {
     bank: Schema.Attribute.Decimal;
     bets: Schema.Attribute.Relation<'oneToMany', 'api::bet.bet'>;
+    bookieSlug: Schema.Attribute.String;
     challengeStatus: Schema.Attribute.Enumeration<
       ['Void', 'In progress', 'Win', 'Lose']
     >;
@@ -509,8 +513,7 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     flag: Schema.Attribute.Media<'images' | 'files'>;
-    league: Schema.Attribute.Relation<'oneToOne', 'api::league.league'>;
-    leagues: Schema.Attribute.Relation<'oneToMany', 'api::league.league'>;
+    leagues: Schema.Attribute.Relation<'manyToMany', 'api::league.league'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -538,7 +541,7 @@ export interface ApiLeagueLeague extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    country: Schema.Attribute.Relation<'oneToOne', 'api::country.country'>;
+    countries: Schema.Attribute.Relation<'manyToMany', 'api::country.country'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -626,6 +629,7 @@ export interface ApiTipTip extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    awayGoals: Schema.Attribute.Integer;
     awayTeam: Schema.Attribute.Relation<'oneToOne', 'api::team.team'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -637,6 +641,7 @@ export interface ApiTipTip extends Struct.CollectionTypeSchema {
           preset: 'defaultHtml';
         }
       >;
+    homeGoals: Schema.Attribute.Integer;
     homeTeam: Schema.Attribute.Relation<'oneToOne', 'api::team.team'>;
     league: Schema.Attribute.Relation<'oneToOne', 'api::league.league'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -649,6 +654,7 @@ export interface ApiTipTip extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::tip-selection.tip-selection'
     >;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

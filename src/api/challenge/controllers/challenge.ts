@@ -49,7 +49,8 @@ export default factories.createCoreController('api::challenge.challenge', ({stra
                 'description',
                 'challengeStatus',
                 'totalBets',
-                'bank'
+                'bank',
+                'bookieSlug'
             ],
             where: {
                 slug,
@@ -67,8 +68,8 @@ export default factories.createCoreController('api::challenge.challenge', ({stra
                         },
                     },
                     populate: {
-                        tips: {
-                            select: ['description', 'starts', 'odds'],
+                        tip: {
+                            select: ['description', 'starts', 'odds', 'homeGoals', 'awayGoals'],
                             where: {
                                 published_at: {
                                     $not: null
@@ -77,31 +78,31 @@ export default factories.createCoreController('api::challenge.challenge', ({stra
                             populate: {
                                 homeTeam: {
                                     select: ['name'],
+                                    populate: {
+                                        logo: {
+                                            select: ['url']
+                                        },
+                                    },
                                     where: {
                                         published_at: {
                                             $not: null
                                         },
                                     },
-                                    populate: {
-                                        logo: {
-                                            select: ['url']
-                                        },
-                                    }
                                 },
                                 awayTeam: {
                                     select: ['name'],
+                                    populate: {
+                                        logo: {
+                                            select: ['url']
+                                        },
+                                    },
                                     where: {
                                         published_at: {
                                             $not: null
                                         },
                                     },
-                                    populate: {
-                                        logo: {
-                                            select: ['url']
-                                        },
-                                    }
                                 },
-                                tipsSelections: {
+                                tipSelections: {
                                     select: ['title'],
                                     where: {
                                         published_at: {
@@ -120,23 +121,10 @@ export default factories.createCoreController('api::challenge.challenge', ({stra
                                         logo: {
                                             select: ['url']
                                         },
-                                        country: {
-                                            select: ['name'],
-                                            where: {
-                                                published_at: {
-                                                    $not: null
-                                                },
-                                            },
-                                            populate: {
-                                                flag: {
-                                                    select: ['url']
-                                                },
-                                            }
-                                        }
                                     }
                                 }
                             }
-                        },
+                        }
                     }
                 },
             }

@@ -44,6 +44,9 @@
         "preset": "defaultHtml"
       },
       "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "bookieSlug": {
+      "type": "string"
     }
   }
 }

@@ -30,9 +30,9 @@
         "Void"
       ]
     },
-    "tips": {
+    "tip": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::tip.tip"
     },
     "stake": {
@@ -44,6 +44,9 @@
         "preset": "defaultHtml"
       },
       "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "bookieSlug": {
+      "type": "string"
     }
   }
 }

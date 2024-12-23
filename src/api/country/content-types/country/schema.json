@@ -31,14 +31,9 @@
     },
     "leagues": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::league.league"
-    },
-    "league": {
-      "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToMany",
       "target": "api::league.league",
-      "mappedBy": "country"
+      "inversedBy": "countries"
     }
   }
 }

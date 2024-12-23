@@ -10,6 +10,8 @@ export default factories.createCoreController('api::bet-category.bet-category', 
         'title',
         'description',
         'betStatus',
+        'stake',
+        'bookieSlug'
       ],
       where: {
         published_at: {
@@ -19,15 +21,15 @@ export default factories.createCoreController('api::bet-category.bet-category', 
       },
       populate: {
         bets: {
-          select: ['title', 'description', 'date', 'betStatus'],
+          select: ['title', 'description', 'date', 'betStatus', 'stake'],
           where: {
             date: {
               $between: [today[0] + 'T' + '00:00:00.000Z', today[0] + 'T' + '23:59:59.999Z']
             },
           },
           populate: {
-            tips: {
-              select: ['description', 'starts', 'odds'],
+            tip: {
+              select: ['description', 'starts', 'odds', 'homeGoals', 'awayGoals'],
               where: {
                 published_at: {
                   $not: null
@@ -36,27 +38,31 @@ export default factories.createCoreController('api::bet-category.bet-category', 
               populate: {
                 homeTeam: {
                   select: ['name'],
+                  populate: {
+                    logo: {
+                      select: ['url']
+                    },
+                  },
                   where: {
                     published_at: {
                       $not: null
                     },
-                  },
-                  logo: {
-                    select: ['url']
                   },
                 },
                 awayTeam: {
                   select: ['name'],
+                  populate: {
+                    logo: {
+                      select: ['url']
+                    },
+                  },
                   where: {
                     published_at: {
                       $not: null
                     },
                   },
-                  logo: {
-                    select: ['url']
-                  },
                 },
-                tipsSelections: {
+                tipSelections: {
                   select: ['title'],
                   where: {
                     published_at: {
@@ -75,19 +81,6 @@ export default factories.createCoreController('api::bet-category.bet-category', 
                     logo: {
                       select: ['url']
                     },
-                    country: {
-                      select: ['name'],
-                      where: {
-                        published_at: {
-                          $not: null
-                        },
-                      },
-                      populate: {
-                        flag: {
-                          select: ['url']
-                        },
-                      }
-                    }
                   }
                 }
               }

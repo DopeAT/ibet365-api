@@ -38,6 +38,12 @@
         "preset": "defaultHtml"
       },
       "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "stake": {
+      "type": "decimal"
+    },
+    "bookieSlug": {
+      "type": "string"
     }
   }
 }

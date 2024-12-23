@@ -33,17 +33,26 @@
       "relation": "oneToOne",
       "target": "api::team.team"
     },
-    "league": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::league.league"
-    },
     "description": {
       "type": "customField",
       "options": {
         "preset": "defaultHtml"
       },
       "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "league": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::league.league"
+    },
+    "title": {
+      "type": "string"
+    },
+    "homeGoals": {
+      "type": "integer"
+    },
+    "awayGoals": {
+      "type": "integer"
     }
   }
 }

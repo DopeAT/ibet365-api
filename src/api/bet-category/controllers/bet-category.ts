@@ -6,6 +6,8 @@ import { factories } from '@strapi/strapi'
 
 export default factories.createCoreController('api::bet-category.bet-category', ({strapi}) => ({
     async find(ctx) {
+        const today = new Date().toISOString().split('T')
+
         const entity = await strapi.db.query("api::bet-category.bet-category").findMany({
             select: [
                 'id',
@@ -26,10 +28,13 @@ export default factories.createCoreController('api::bet-category.bet-category', 
                         published_at: {
                             $not: null
                         },
+                        date: {
+                            $between: [today[0] + 'T' + '00:00:00.000Z', today[0] + 'T' + '23:59:59.999Z']
+                        },
                     },
                     populate: {
-                        tips: {
-                            select: ['description', 'starts', 'odds'],
+                        tip: {
+                            select: ['description', 'starts', 'odds', 'homeGoals', 'awayGoals'],
                             where: {
                                 published_at: {
                                     $not: null
@@ -71,8 +76,8 @@ export default factories.createCoreController('api::bet-category.bet-category', 
                         },
                     },
                     populate: {
-                        tips: {
-                            select: ['description', 'starts', 'odds'],
+                        tip: {
+                            select: ['description', 'starts', 'odds', 'homeGoals', 'awayGoals'],
                             where: {
                                 published_at: {
                                     $not: null

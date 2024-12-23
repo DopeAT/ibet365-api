@@ -29,11 +29,11 @@
       "relation": "oneToMany",
       "target": "api::team.team"
     },
-    "country": {
+    "countries": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToMany",
       "target": "api::country.country",
-      "inversedBy": "league"
+      "inversedBy": "leagues"
     }
   }
 }
