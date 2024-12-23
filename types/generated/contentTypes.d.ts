@@ -529,6 +529,38 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
+  collectionName: 'faqs';
+  info: {
+    displayName: 'Faq';
+    pluralName: 'faqs';
+    singularName: 'faq';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    answer: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    question: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiLeagueLeague extends Struct.CollectionTypeSchema {
   collectionName: 'leagues';
   info: {
@@ -1174,6 +1206,7 @@ declare module '@strapi/strapi' {
       'api::bet.bet': ApiBetBet;
       'api::challenge.challenge': ApiChallengeChallenge;
       'api::country.country': ApiCountryCountry;
+      'api::faq.faq': ApiFaqFaq;
       'api::league.league': ApiLeagueLeague;
       'api::team.team': ApiTeamTeam;
       'api::tip-selection.tip-selection': ApiTipSelectionTipSelection;
